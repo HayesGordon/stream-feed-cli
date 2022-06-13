@@ -45,7 +45,10 @@ void _readAndGenerateUserTokens() {
     print('\nGenerate token for user with username:');
     final username = stdin.readLineSync(encoding: utf8)?.trim();
     _ifEmptyExit(username);
-    final token = serverClient.frontendToken(username!);
+    final token = serverClient.frontendToken(
+      username!,
+      expiresAt: DateTime.now().add(Duration(days: 120)),
+    );
     print('\nToken generated for $username:  $token\n');
   }
 }
